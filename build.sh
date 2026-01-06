@@ -5,8 +5,8 @@ set -o errexit
 # Install dependencies
 pip install -r requirements.txt
 
-# Convert static asset files
-python manage.py collectstatic --no-input
-
-# Apply any outstanding database migrations
+# Run migrations explicitly BEFORE gunicorn starts
 python manage.py migrate
+
+# Collect static files
+python manage.py collectstatic --no-input
