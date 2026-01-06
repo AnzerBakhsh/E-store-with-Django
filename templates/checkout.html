@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 fw-bold">Checkout</h2>
+
+<div class="row">
+    <div class="col-md-7 mb-4">
+        <div class="card shadow-sm p-4">
+            <h4 class="mb-3">Billing Details</h4>
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    {{ form.full_name }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Phone Number</label>
+                    {{ form.phone }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">City</label>
+                    {{ form.city }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Shipping Address</label>
+                    {{ form.address }}
+                </div>
+
+                <hr class="my-4">
+
+                <h4 class="mb-3">Payment</h4>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i> Only <strong>Cash on Delivery (COD)</strong> is available
+                    right now.
+                </div>
+
+                <button class="btn btn-primary w-100 btn-lg" type="submit">Place Order (${{ total_price }})</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">Your Cart</span>
+                    <span class="badge bg-primary rounded-pill">{{ request.session.cart|length }}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (USD)</span>
+                        <strong>${{ total_price }}</strong>
+                    </li>
+                </ul>
+                <a href="{% url 'cart_detail' %}" class="btn btn-outline-secondary w-100">Back to Cart</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

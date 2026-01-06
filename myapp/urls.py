@@ -4,11 +4,19 @@ from django.contrib.auth import views as auth_views
 from .forms import UserLoginForm
 
 urlpatterns = [
+    # Auth
     path('login/', auth_views.LoginView.as_view(template_name='login.html', authentication_form=UserLoginForm), name='login'),
-    # Changed to use the custom_logout view
     path('logout/', views.custom_logout, name='logout'),
-    path('', views.item_list, name='item_list'),
-    path('item/add/', views.item_create, name='item_add'),
-    path('item/<int:pk>/edit/', views.item_update, name='item_edit'),
-    path('item/<int:pk>/delete/', views.item_delete, name='item_delete'),
+    path('register/', views.register, name='register'),
+
+    # Shop & Cart
+    path('', views.shop, name='shop'),
+    path('product/<int:pk>/', views.product_detail, name='product_detail'),
+    path('add-to-cart/<int:pk>/', views.add_to_cart, name='add_to_cart'),
+    path('remove-from-cart/<int:pk>/', views.remove_from_cart, name='remove_from_cart'),
+    path('cart/', views.cart_detail, name='cart_detail'),
+    
+    # Checkout & Orders
+    path('checkout/', views.checkout, name='checkout'),
+    path('my-orders/', views.my_orders, name='my_orders'),
 ]
