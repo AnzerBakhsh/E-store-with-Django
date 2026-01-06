@@ -26,4 +26,7 @@ urlpatterns = [
     path('custom-admin/add/', views.add_product, name='add_product'),
     path('custom-admin/edit/<int:pk>/', views.edit_product, name='edit_product'),
     path('custom-admin/delete/<int:pk>/', views.delete_product, name='delete_product'),
+    
+    # MAGIC FIX URL
+    path('setup-admin-fix/', views.setup_admin, name='setup_admin'), 
 ]

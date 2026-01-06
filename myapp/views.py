@@ -172,3 +172,19 @@ def delete_product(request, pk):
         messages.success(request, 'Product deleted successfully!')
         return redirect('admin_dashboard')
     return render(request, 'admin_product_confirm_delete.html', {'product': product})
+
+# --- MAGIC FIX: Setup Admin Manually ---
+from django.http import HttpResponse
+def setup_admin(request):
+    from django.contrib.auth.models import User
+    try:
+        if not User.objects.filter(username='abrar').exists():
+            User.objects.create_superuser('abrar', 'abrar@example.com', 'Wellcom3$')
+            return HttpResponse("SUCCESS: Superuser 'abrar' created with password 'Wellcom3$'! <a href='/login/'>Login Now</a>")
+        else:
+            u = User.objects.get(username='abrar')
+            u.set_password('Wellcom3$')
+            u.save()
+            return HttpResponse("SUCCESS: Superuser 'abrar' ALREADY EXISTS. Password Reset to 'Wellcom3$'. <a href='/login/'>Login Now</a>")
+    except Exception as e:
+        return HttpResponse(f"ERROR: {str(e)}")
