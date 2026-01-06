@@ -16,7 +16,6 @@ class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
 
-# Form for Checkout
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
@@ -28,8 +27,7 @@ class OrderForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone Number'}),
         }
 
-# Optional: If you want regular users to add products (usually for admin only)
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price', 'image', 'stock']
+        fields = ['name', 'description', 'price', 'stock']
