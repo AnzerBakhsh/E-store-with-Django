@@ -18,8 +18,12 @@
     <div class="col-md-6 col-lg-3">
         <div class="card h-100 border-0 shadow-soft product-card">
             <div class="position-relative overflow-hidden rounded-top-4 bg-light text-center py-5">
-                <!-- Placeholder for Image since ImageField is temporarily removed -->
+                {% if product.image %}
+                <img src="{{ product.image.url }}" class="img-fluid w-100 h-100 object-fit-cover transition-transform"
+                    alt="{{ product.name }}" style="max-height: 250px;">
+                {% else %}
                 <i class="fas fa-box-open fa-4x text-primary opacity-50 transition-transform"></i>
+                {% endif %}
 
                 <div class="position-absolute top-0 end-0 p-3">
                     <a href="{% url 'toggle_wishlist' product.id %}"

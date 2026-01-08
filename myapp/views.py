@@ -142,7 +142,7 @@ def admin_dashboard(request):
 @user_passes_test(lambda u: u.is_superuser)
 def add_product(request):
     if request.method == 'POST':
-        form = ProductForm(request.POST) # Removing files argument for now as ImageField is gone
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Product added successfully!')
@@ -155,7 +155,7 @@ def add_product(request):
 def edit_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
     if request.method == 'POST':
-        form = ProductForm(request.POST, instance=product)
+        form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
             messages.success(request, 'Product updated successfully!')

@@ -6,8 +6,13 @@
     <div class="col-md-6 mb-4 mb-md-0">
         <div class="card border-0 shadow-lg overflow-hidden rounded-4">
             <div class="bg-light d-flex align-items-center justify-content-center text-muted p-5"
-                style="height: 400px;">
+                style="height: 400px; overflow: hidden;">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" class="img-fluid w-100 h-100 object-fit-contain"
+                    alt="{{ product.name }}">
+                {% else %}
                 <i class="fas fa-box-open fa-5x opacity-50"></i>
+                {% endif %}
             </div>
         </div>
     </div>
